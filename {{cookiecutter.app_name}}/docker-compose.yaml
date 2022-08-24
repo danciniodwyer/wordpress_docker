@@ -1,0 +1,38 @@
+version: '3'
+services:
+  mysql:
+    env_file: ./docker.env
+    image: mysql:8.0
+    networks:
+      - {{cookiecutter.app_name}}_network
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+  phpmyadmin:
+    depends_on:
+      - mysql
+    env_file: ./docker.env
+    image: phpmyadmin:5.2
+    networks:
+      - {{cookiecutter.app_name}}_network
+    ports:
+      - '{{cookiecutter.phpmyadmin_port}}:80'
+    restart: always
+  wordpress:
+    depends_on:
+      - mysql
+    env_file: ./docker.env
+    image: wordpress:6.0
+    networks:
+      - {{cookiecutter.app_name}}_network
+    ports:
+      - '{{cookiecutter.wordpress_port}}:80'
+    restart: always
+    volumes:
+      - ./php-settings.ini:/usr/local/etc/php/conf.d/php-settings.ini
+      - wordpress_data:/var/www/html
+networks:
+  {{cookiecutter.app_name}}_network:
+volumes:
+  mysql_data:
+  wordpress_data:

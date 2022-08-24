@@ -1,0 +1,9 @@
+{
+    "app_name": "wordpress",
+    "wordpress_port": "8888",
+    "phpmyadmin_port": "8889",
+    "mysql_root_password": "rootpw",
+    "wordpressdb_name": "wordpressdb",
+    "wordpressdb_user": "wordpressdb_user",
+    "wordpressdb_password": "wordpressdb_password"
+}
